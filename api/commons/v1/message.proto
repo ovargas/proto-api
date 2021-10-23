@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package api.commons.v1;
+
+option go_package = "github.com/ovargas/api-go/commons/v1;commons";
+
+enum SortType {
+  SORT_TYPE_UNSPECIFIED = 0;
+  ASC = 1;
+  DESC = 2;
+}
+
+message Sort {
+  string field = 1;
+  SortType sort = 2;
+}
+
+message Page {
+  int32 number = 1;
+  sint32 size = 2;
+  repeated Sort sorts = 3;
+}

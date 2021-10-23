@@ -1,0 +1,16 @@
+version: v1
+deps:
+  - buf.build/grpc-ecosystem/grpc-gateway
+lint:
+  ignore:
+    - dependencies
+  use:
+    - DEFAULT
+  #    - COMMENTS
+  except:
+    - ENUM_VALUE_PREFIX
+    - RPC_REQUEST_RESPONSE_UNIQUE
+    - RPC_RESPONSE_STANDARD_NAME
+breaking:
+  use:
+    - PACKAGE # check for breaking changes at the package level

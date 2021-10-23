@@ -16,6 +16,7 @@
 
 .idea/
 /gen
+/bin
 
 # mac files
 .DS_Store

@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package api.storage.v1;
+
+option go_package = "github.com/ovargas/api-go/storage/v1;storage";
+
+import "api/storage/v1/message.proto";
+import "google/protobuf/empty.proto";
+
+import "google/api/annotations.proto";
+
+
+message DownloadRequest {
+  string filename = 1;
+}
+
+message CreateRequest {
+  string filename = 1;
+  string media_type = 2;
+  bytes bytes = 3;
+}
+
+message DeleteRequest {
+  string filename = 1;
+}
+
+service StorageService {
+  rpc Download(DownloadRequest) returns(File) {
+    option (google.api.http) = {
+      get: "/api/v1/storage/{filename}"
+    };
+  }
+
+  rpc Create(CreateRequest) returns (File) {
+    option (google.api.http) = {
+      post: "/api/v1/storage"
+      body: "*"
+    };
+  }
+
+  rpc Delete(DeleteRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/api/v1/storage/{filename}"
+    };
+  }
+}

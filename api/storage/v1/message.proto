@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package api.storage.v1;
+
+option go_package = "github.com/ovargas/api-go/storage/v1;storage";
+
+message File {
+  string name = 1;
+  string media_type = 2;
+  oneof content {
+    string url = 3;
+    bytes bytes = 4;
+  }
+}

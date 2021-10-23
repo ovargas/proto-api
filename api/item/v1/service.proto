@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package api.item.v1;
+
+option go_package = "github.com/ovargas/api-go/item/v1;item";
+
+import "api/item/v1/message.proto";
+import "api/storage/v1/message.proto";
+import "api/commons/v1/message.proto";
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+//import "protoc-gen-openapiv2/options/annotations.proto";
+//import "google/api/field_behavior.proto";
+
+message GetRequest {
+  string id = 1;
+}
+
+message FetchRequest {
+  repeated string ids = 1;
+  string name = 2;
+  string description = 3;
+  api.commons.v1.Page page = 4;
+}
+
+message FetchResponse {
+  repeated Item content = 1;
+  int32 total_records = 2;
+}
+
+message CreateRequest {
+  string name = 1;
+  string description = 2;
+  api.storage.v1.File image = 3;
+}
+
+message UpdateRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  api.storage.v1.File image = 4;
+}
+
+message DeleteRequest {
+  string id = 1;
+}
+
+service ItemService {
+
+  rpc Get(GetRequest) returns (Item) {
+    option (google.api.http) = {
+      get: "/api/v1/items/{id}"
+    };
+
+  }
+
+  rpc Fetch(FetchRequest) returns (FetchResponse) {
+
+  }
+
+  rpc Create(CreateRequest) returns (Item) {
+    option (google.api.http) = {
+      post: "/api/v1/items"
+      body: "*"
+    };
+  }
+
+  rpc Update(UpdateRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      patch: "/api/v1/items/{id}"
+      body: "*"
+    };
+  }
+
+  rpc Delete(DeleteRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/api/v1/items/{id}"
+    };
+  }
+}

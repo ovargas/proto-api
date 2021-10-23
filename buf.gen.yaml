@@ -1,0 +1,29 @@
+version: v1
+plugins:
+#  - name: java
+#    out: gen/api-java
+  - name: go
+    out: gen/api-go
+    opt: paths=source_relative
+  - name: go-grpc
+    out: gen/api-go
+    opt: paths=source_relative
+  - name: grpc-gateway
+    out: gen/api-go
+    opt:
+      - paths=source_relative
+      - generate_unbound_methods=true
+#  - name: ts
+#    out: gen/api-js
+#    opt:
+#      - import_style=commonjs,binary
+#  - name: js-grpc
+#    out: gen/api-js
+#    opt: grpc_js
+#    path: grpc_tools_node_protoc_plugin
+  - name: openapiv2
+    out: gen/swagger
+  - name: doc
+    out: gen/docs
+    opt: json,proto_workspace.json
+    strategy: all

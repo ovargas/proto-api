@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package api.item.v1;
+
+option go_package = "github.com/ovargas/api-go/item/v1;item";
+
+import "api/storage/v1/message.proto";
+
+enum ItemStatus {
+  ITEM_STATUS_UNSPECIFIED = 0;
+  ACTIVE = 1;
+  DELETED = 2;
+}
+
+message Item {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  api.storage.v1.File image = 4;
+}
