@@ -55,7 +55,9 @@ service ItemService {
   }
 
   rpc Fetch(FetchRequest) returns (FetchResponse) {
-
+    option (google.api.http) = {
+      get: "/api/v1/items"
+    };
   }
 
   rpc Create(CreateRequest) returns (Item) {
